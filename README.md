@@ -1,115 +1,241 @@
-# Awesome-Speech-To-Text-STT
+# 🎙️ Awesome Speech-to-Text (STT)
 
-## Top Speech-to-Text (STT) Tools Ecosystem
+<p align="center">
+  <img src="assets/banner.svg" alt="Awesome Speech-to-Text (STT) Ecosystem Banner" width="100%" />
+</p>
 
-**Curated List of SaaS Products & Open-Source GitHub Projects**  
-*Focused on Streaming Transcription, Speaker Diarization & Word-Level Timestamps*  
-**Last updated: March 2026**
-
-This repository tracks notable **SaaS platforms** and **open-source projects** for **Speech-to-Text (STT)**. These tools convert spoken audio into written text — powering meeting transcription, voice interfaces, subtitle generation, call analytics, and accessibility features — with options ranging from managed APIs with sub-second streaming latency to local models that run entirely offline.
-
-**Examples** include Rev AI, Google Cloud STT, Deepgram, Whisper, Speechmatics, AssemblyAI, Otter.ai, Verbit, Sonix, and Trint (the category leaders).
-
-**Open-source emphasis**: This section is heavily expanded with every major active project for self-hosting, local inference, and transparent model weights — ideal for teams prioritizing data sovereignty, developers building offline voice features, and organizations avoiding per-minute transcription costs.
-
-Contributions welcome! Open a PR to add/update entries. Keep descriptions factual and link to official sites.
-
-## Table of Contents
-- [SaaS/Hosted Platforms](#saas-hosted-platforms)
-- [Open-Source GitHub Projects](#open-source-github-projects)
-- [How to Contribute](#how-to-contribute)
-- [Disclaimer](#disclaimer)
-
-## SaaS/Hosted Platforms
-
-- **[Deepgram](https://deepgram.com/)**  
-  **Enterprise-grade STT API with the fastest streaming latency and highest accuracy in independent benchmarks.** A 2026 feature comparison found Deepgram delivered **the best combination of speed and accuracy** on real-world business audio, with the strongest entity detection and streaming response times. **Nova-3** targets noisy environments. Pricing is usage-based per minute with volume discounts. **Best for real-time voice agents and call analytics** where latency matters.
-
-- **[AssemblyAI](https://www.assemblyai.com/)**  
-  **Developer-first STT API with strong accuracy and a free tier.** Handles **speaker diarization, sentiment analysis, topic detection, and PII redaction** in a single API call. **Universal-2** model focuses on accuracy across accents and noisy conditions. Free tier includes limited monthly transcription; paid plans scale per hour. **Best for developers wanting rich audio intelligence features alongside transcription.**
-
-- **[Rev AI](https://www.rev.com/)**  
-  **High-accuracy STT API with human transcription options for the same account.** Rev AI claims **industry-leading accuracy** with the ability to escalate to human transcription when the model isn't confident enough. Supports **custom vocabulary, sentiment analysis, and topic extraction**. Usage-based pricing with volume discounts. **Best for teams needing a human-in-the-loop fallback for critical content.**
-
-- **[Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text)**  
-  **Mature, globally distributed STT service with 125+ languages.** Supports **streaming, batch, and real-time transcription** with automatic punctuation, speaker diarization, and **model adaptation** for domain-specific vocabulary. Deep integration with Google Cloud ecosystem. **Best for teams already invested in Google Cloud.**
-
-- **[Speechmatics](https://www.speechmatics.com/)**  
-  **Enterprise STT with strong accuracy across accents and dialects.** Features **real-time and batch transcription**, speaker diarization, and **custom dictionary** support. UK-based with GDPR-focused deployment options. **Best for European enterprises with data residency requirements.**
-
-- **[Otter.ai](https://otter.ai/)**  
-  **Meeting transcription and note-taking platform** rather than a raw API. Joins Zoom, Google Meet, and Teams calls automatically, produces summaries and action items, and maintains a searchable meeting archive. Free tier with limited minutes; paid plans per user. **Best for knowledge workers wanting meeting notes without API integration.**
-
-- **[Verbit](https://verbit.ai/)**  
-  **Transcription and captioning platform for legal, education, and media industries** with hybrid AI + human workflows.
-
-- **[Sonix](https://sonix.ai/)**  
-  **Automated transcription with multi-language support and editing tools.** Pay-as-you-go pricing with a free trial. **Best for podcasters and journalists** wanting transcription without a subscription.
-
-- **[Trint](https://trint.com/)**  
-  **Transcription platform designed for journalists and media organizations** with collaborative editing and story verification features.
-
-## Open-Source GitHub Projects
-
-- **[Whisper](https://github.com/openai/whisper)**  
-  **The foundational open-source speech recognition model** — MIT licensed, 88,000+ GitHub stars. Trained on **680,000 hours of multilingual and multitask supervised data** collected from the web, approaching human-level robustness on English speech recognition. Supports **99 languages** with automatic language detection, **word-level timestamps**, and translation to English. **Approach**: large-scale weak supervision eliminates the need for significant fine-tuning for domain adaptation. **Limitations**: `openai-whisper` runs **17x slower than real-time on CPU** and doesn't handle streaming natively. **Best as the reference model** — most production open-source STT stacks build on Whisper weights via faster inference engines.
-
-- **[faster-whisper](https://github.com/SYSTRAN/faster-whisper)**  
-  **The production inference engine for Whisper** — **up to 4x faster than openai/whisper with the same accuracy** and **less memory usage** using CTranslate2. MIT licensed. Supports **CPU and GPU** with 8-bit and 16-bit quantization. **`large-v3` model reaches ~2.2x real-time on GPU** and runs on CPU with int8 quantization. **The default choice for self-hosted Whisper inference** — used by WhisperX, WhisperLiveKit, and most production deployments. Install via `pip install faster-whisper`.
-
-- **[WhisperX](https://github.com/m-bain/whisperX)**  
-  **Word-level timestamps and speaker diarization for Whisper** — BSD-2-Clause licensed, 16,000+ GitHub stars. Adds **forced alignment** for accurate word-level timestamps (essential for subtitle sync) and **speaker diarization** via pyannote-audio. Claims **70x real-time transcription on GPU**. **The standard choice for subtitle generation and meeting transcription** where "who said what when" matters. Requires Hugging Face token for diarization models.
-
-- **[WhisperLiveKit](https://github.com/QuentinFuxa/WhisperLiveKit)**  
-  **Real-time speech-to-text server with speaker diarization and turn detection** — 2,000+ GitHub stars. **Streaming with configurable latency** from 200ms (low-latency realtime) to 2000ms (high-precision batch). **simulstreaming** for fast models plus **WhisperStreaming** for higher accuracy. **Built-in speaker diarization** with Sortformer and Diarizen. **VAD-based turn detection** for knowing when someone is speaking. **WebSocket API and web interface** included. **Best for building real-time transcription servers** with speaker attribution.
-
-- **[whisper.cpp](https://github.com/ggerganov/whisper.cpp)**  
-  **High-performance C/C++ implementation of Whisper** — MIT licensed, 40,000+ GitHub stars. **Runs on CPU, Apple Silicon (Metal), CUDA, and Vulkan** with no Python or PyTorch dependency. **Quantized GGUF models** enable running Whisper on Raspberry Pi and mobile devices. **`whisper-server`** provides OpenAI-compatible API. **The foundation for on-device and embedded transcription** — used by many mobile apps and edge deployments.
-
-- **[WhisperLive](https://github.com/collabora/WhisperLive)**  
-  **Practical real-time implementation of OpenAI Whisper** from Collabora — 5,000+ GitHub stars. **WebSocket-based** with client libraries for Python and JavaScript. Supports **faster-whisper backend** and **multiple concurrent clients**. **The battle-tested choice for browser-to-server streaming transcription** — integrated into meeting tools and voice assistants.
-
-- **[NVIDIA NeMo](https://github.com/NVIDIA/NeMo)**  
-  **NVIDIA's toolkit for conversational AI including state-of-the-art STT models** — Apache 2.0 licensed. **Parakeet** and **Canary** models rank at the top of the Hugging Face Open ASR Leaderboard for accuracy and speed. **Optimized for NVIDIA GPUs** with TensorRT integration. **Best for GPU-accelerated transcription at scale** where maximum throughput matters.
-
-- **[SpeechBrain](https://github.com/speechbrain/speechbrain)**  
-  **Open-source conversational AI toolkit with speech recognition, speaker diarization, and enhancement** — Apache 2.0 licensed, 9,000+ GitHub stars. **Used in academic research and production** — integrated by the University of Groningen's CogniGron and other research institutions. **Best for researchers** wanting a unified framework for multiple speech tasks.
-
-- **[Kaldi](https://github.com/kaldi-asr/kaldi)**  
-  **The classic open-source speech recognition toolkit** — the foundation for many older systems. **Steep learning curve** but still used in research and legacy deployments. **Best for researchers** studying traditional ASR architectures.
-
-- **[Vosk](https://github.com/alphacep/vosk-api)**  
-  **Offline speech recognition toolkit with 20+ language models** — Apache 2.0 licensed. **Lightweight models** (50MB) run on Raspberry Pi, Android, and iOS without internet. **`vosk-server`** provides WebSocket API. **Best for offline, low-resource devices** where cloud connectivity isn't available.
-
-- **[Whisper-Streaming](https://github.com/ufal/whisper_streaming)**  
-  **Real-time streaming implementation of Whisper** from Charles University — Apache 2.0 licensed. **Uses LocalAgreement policy** to emit confirmed text with low latency. **Best for research on streaming Whisper architectures**.
-
-### Additional Strong Open-Source Options
-
-- **WhisperX Large-v3** — Combined with faster-whisper backend for highest accuracy with word-level timestamps.
-- **Silero VAD** — Voice activity detection model for segmenting audio before transcription. Essential for efficient long-form processing.
-- **pyannote-audio** — Speaker diarization library used by WhisperX and WhisperLiveKit.
-- **wav2vec 2.0 / HuBERT / WavLM** — Self-supervised speech representation models from Meta and Microsoft. Foundation for many fine-tuned ASR systems.
-- **Speech Recognition Toolkit (Sphinx)** — CMU's classic speech recognition system.
-
-**Frameworks for building custom systems**: Combine **faster-whisper** for production inference at 4x speed with same accuracy, **WhisperX** for word-level timestamps and speaker diarization, **WhisperLiveKit** or **WhisperLive** for real-time streaming with VAD turn detection, **NVIDIA NeMo** for GPU-optimized batch transcription at scale, and **Vosk** for fully offline edge deployment — to build a complete self-hosted STT stack from real-time voice agents to offline subtitle generation.
-
-## How to Contribute
-
-1. Fork the repo.
-2. Add/edit entries in `README.md` (follow existing format).
-3. Include: name, link, 1–2 sentence description, and whether it's SaaS or open-source.
-4. Submit PR with a short explanation.
-
-Star the repo if you find it useful!
-
-## Disclaimer
-
-- This is a **community-curated** list — not exhaustive and not an endorsement.
-- Speech-to-text tools differ significantly in latency, accuracy, language support, and deployment model. **OpenAI's `openai-whisper` runs 17x slower than real-time on CPU** — use faster-whisper or whisper.cpp for production . **faster-whisper delivers 4x speedup with the same accuracy** via CTranslate2 . **WhisperX adds word-level timestamps and diarization** essential for subtitle sync and meeting attribution . **Deepgram leads on streaming latency and accuracy** in independent business-audio comparisons, but hosted APIs require sending audio to third parties. **Speaker diarization quality varies significantly** — pyannote models require Hugging Face tokens and add processing overhead. **Word-level timestamps from forced alignment can be wrong** on overlapping speech or heavy accents .
-- Self-hosted open-source solutions require proper GPU infrastructure for real-time performance, VAD configuration for long-form audio, and model selection tradeoffs between accuracy and speed.
+<p align="center">
+  <a href="https://github.com/ishandutta2007/Awesome-Awesome-Awesome"><img src="https://img.shields.io/badge/Awesome-%E2%9C%94-blueviolet?style=flat-square&logo=github" alt="Awesome"/></a><a href="https://discord.gg/jc4xtF58Ve"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Speech-To-Text-STT/stargazers"><img src="https://img.shields.io/github/stars/ishandutta2007/Awesome-Speech-To-Text-STT?style=flat-square&logo=github&color=gold" alt="GitHub Stars"/></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Speech-To-Text-STT/network/members"><img src="https://img.shields.io/github/forks/ishandutta2007/Awesome-Speech-To-Text-STT?style=flat-square&logo=github&color=blue" alt="GitHub Forks"/></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Speech-To-Text-STT/issues"><img src="https://img.shields.io/github/issues/ishandutta2007/Awesome-Speech-To-Text-STT?style=flat-square&color=brightgreen" alt="Issues"/></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Speech-To-Text-STT/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"/></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Speech-To-Text-STT/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License"/></a>
+  <a href="https://github.com/ishandutta2007"><img alt="GitHub followers" src="https://img.shields.io/github/followers/ishandutta2007?label=Follow" /></a>
+</p>
 
 ---
 
-**Made for developers, researchers, meeting transcription builders, and anyone building speech-to-text applications.**  
-Let's make speech-to-text more open, accurate, and locally runnable.
+## 📖 Overview
+
+A definitive, SEO-optimized curated directory of **Speech-to-Text (STT)**, **Automatic Speech Recognition (ASR)**, and **Voice AI** technologies. Whether you are architecting ultra-low latency conversational AI voice agents, building automated podcast and meeting transcription pipelines with speaker diarization, generating frame-accurate video subtitles with word-level timestamps, or deploying self-hosted offline inference models for privacy and data sovereignty, this repository tracks the top enterprise SaaS solutions and open-source models available.
+
+---
+
+## 📑 Table of Contents
+
+- [🌐 Sector Overview & Market Dynamics](#-sector-overview--market-dynamics)
+- [☁️ Top SaaS & Hosted STT Platforms](#️-top-saas--hosted-stt-platforms)
+- [💻 Open-Source GitHub Projects](#-open-source-github-projects)
+- [🎯 Architecture & Selection Guide](#-architecture--selection-guide)
+- [🤝 How to Contribute](#-how-to-contribute)
+- [📈 Star History](#-star-history)
+- [💖 Support & Sponsoring](#-support--sponsoring)
+- [⚖️ Disclaimer](#️-disclaimer)
+
+---
+
+## 🌐 Sector Overview & Market Dynamics
+
+The global **Speech-to-Text (STT) and voice recognition market** was valued at approximately **$13.5 Billion in 2024** and is projected to surpass **$48.5 Billion by 2032**, expanding at a robust Compound Annual Growth Rate (**CAGR**) of **17.5% – 21.2%**. This exponential surge is catalyzed by the proliferation of real-time conversational AI voice agents, contact center automated intelligence, automated medical and legal charting, multilingual video dubbing, and regulatory accessibility mandates.
+
+From a structural perspective, the sector is **moderately fragmented** rather than a winner-take-all monopoly. While cloud hyperscalers (Microsoft Azure, Google Cloud, AWS) maintain formidable scale, bundled distribution, and enterprise governance, specialized pure-play providers (Deepgram, AssemblyAI, Rev AI, Speechmatics) command significant developer and enterprise share by competing aggressively on sub-300ms streaming latency, domain-specific acoustic fine-tuning, and developer ergonomics. In parallel, the rapid maturation of open-source architectures—anchored by OpenAI's Whisper ecosystem, CTranslate2 inference engines, and quantized edge runtimes—has empowered engineering teams to deploy sovereign, cost-effective on-premise and on-device transcription pipelines, preventing proprietary lock-in.
+
+---
+
+## ☁️ Top SaaS & Hosted STT Platforms
+
+The table below compiles leading commercial Speech-to-Text platforms, featuring concrete starting tier pricing, explicit free tier / trial terms, and sorted descending by **Company Scale (Valuation / Revenue)**:
+
+| 🏢 Platform / Service | 🎯 Core Focus & Capabilities | 💵 Starting Tier Pricing | 🎁 Free Tier / Trial Limits | 📊 Company Scale (Valuation / Revenue) |
+| :--- | :--- | :--- | :--- | :--- |
+| **[Microsoft Azure Speech-to-Text](https://azure.microsoft.com/en-us/products/ai-services/speech-to-text)** | Global enterprise ASR supporting 100+ languages, custom acoustic/language models, real-time streaming, speaker diarization, and tight Azure OpenAI integration. | **$1.00 / audio hour** ($0.0167 / minute) for Standard pay-as-you-go | **5 audio hours / month free forever** (F0 free tier); $200 Azure credits on 30-day trial | **~$3.1 Trillion** (Market Cap) / ~$140B Cloud ARR |
+| **[Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text)** | Mature, scalable STT API featuring Chirp 2 foundational model, 125+ languages, automatic punctuation, multichannel recognition, and Vertex AI ecosystem connectivity. | **$0.016 / minute** ($0.96 / hour) for standard v1 batch & streaming models | **60 minutes / month free forever**; $300 new customer credits for 90 days | **~$2.2 Trillion** (Alphabet Market Cap) / ~$40B Cloud ARR |
+| **[Amazon Transcribe](https://aws.amazon.com/transcribe/)** | Fully managed AWS speech recognition service with real-time streaming over WebSockets/HTTP2, custom vocabularies, PII redaction, and contact center call analytics. | **$0.024 / minute** ($1.44 / hour) for first 250,000 minutes / month | **60 minutes / month free for 12 months** on AWS Free Tier | **~$1.9 Trillion** (Amazon Market Cap) / ~$105B AWS ARR |
+| **[Verbit](https://verbit.ai/)** | Enterprise transcription and captioning platform combining proprietary speech AI with human-in-the-loop verification; specialized for legal, higher ed, and media compliance. | **$0.15 / minute** ($9.00 / hour) for automated transcription and captioning self-service | **14-day free trial with up to 60 minutes** of automated transcription | **$2.0 Billion** (Valuation - Series E Unicorn) / ~$100M ARR |
+| **[Otter.ai](https://otter.ai/)** | AI meeting assistant that automatically joins Zoom, Google Meet, and Microsoft Teams to deliver real-time live transcription, automated summaries, and action item capture. | **$10.00 / user / month** ($120/yr billed annually) for Pro tier (1,200 mins/month) | **300 minutes / month free forever** (up to 30 minutes max per conversation) | **$1.1 Billion** (Valuation - Series B Unicorn) / ~$60M ARR |
+| **[AssemblyAI](https://www.assemblyai.com/)** | Developer-centric speech AI API powered by Universal-2; provides streaming ASR, speaker diarization, sentiment analysis, PII redaction, and audio LLM synthesis. | **$0.0061 / minute** ($0.37 / hour) for async batch; **$0.0075 / minute** ($0.45 / hour) for real-time streaming | **Free tier with $50 monthly recurring credit** (~135 hours free transcription) | **~$300 Million** (Valuation - $115M Raised) / ~$30M ARR |
+| **[Speechmatics](https://www.speechmatics.com/)** | Autonomous Speech Recognition (Ursa model) renowned for industry-leading accuracy across diverse accents, real-time streaming, and GDPR-compliant sovereign cloud/on-prem. | **$0.0125 / minute** ($0.75 / hour) for Standard batch & streaming; **$0.0208 / minute** for Enhanced | **8 hours (480 minutes) / month free forever** on self-service SaaS | **~$150 Million** (Valuation - $62M Series B) / ~$25M ARR |
+| **[Deepgram](https://deepgram.com/)** | High-throughput, end-to-end deep learning STT engine (Nova-3 & Nova-2) built for conversational voice agents with sub-300ms streaming latency and high noisy-audio accuracy. | **$0.0043 / minute** ($0.258 / hour) for Nova-2 pre-recorded; **$0.0059 / minute** ($0.354 / hour) for streaming | **$200 free credit on signup** (~46,500 pre-recorded minutes, no credit card required) | **~$125 Million** (Valuation - $125M Raised) / ~$25M ARR |
+| **[Rev AI](https://www.rev.com/)** | Battle-tested speech recognition API trained on 50,000+ hours of human-transcribed audio, featuring custom vocabulary, sentiment analysis, and seamless fallback to human review. | **$0.02 / minute** ($1.20 / hour) for automated ASR; optional 99%+ accurate human review at $1.50 / min | **5 hours (300 minutes) free trial credits** on account registration | **~$100 Million+** (Annual Revenue) / ~$200M+ Valuation |
+| **[Trint](https://trint.com/)** | Web-based collaborative transcription and audio-text storytelling platform engineered for journalists, newsrooms, media organizations, and broadcast production teams. | **$48.00 / user / month** (billed annually) for Starter tier (up to 300 transcription mins/month) | **7-day free trial with up to 3 transcription files** (up to 180 minutes total) | **~$15 Million ARR** ($30M+ Raised, Acquired by Bending Spoons) |
+| **[Sonix](https://sonix.ai/)** | Automated speech-to-text platform with interactive browser transcript editor, automated multi-language translation, subtitle burn-in, and multi-track audio processing. | **$10.00 / hour** ($0.167 / minute) standard pay-as-you-go; or **$5.00 / user / month** + $5.00 / hour Premium | **30 minutes of free audio/video transcription trial** (no credit card required) | **~$10 Million ARR** (Profitable, Private / Bootstrapped & Acquired) |
+
+---
+
+## 💻 Open-Source GitHub Projects
+
+Curated collection of premier open-source Speech-to-Text and audio machine learning frameworks for self-hosting, local offline execution, and embedded edge deployment. **Sorted strictly by GitHub Star Count (Descending)**:
+
+### 1. [Whisper](https://github.com/openai/whisper) [![Stars](https://img.shields.io/github/stars/openai/whisper?style=social&color=white)](https://github.com/openai/whisper/stargazers)
+- **Description**: The foundational general-purpose speech recognition model trained on 680,000 hours of multilingual, multitask supervised web data. Supports 99 languages, automatic language identification, phrase translation, and word-level timestamps. Serves as the benchmark weights for modern speech AI.
+- **License**: MIT
+- **Best For**: Foundational research, offline batch transcription, and base model weights.
+
+### 2. [whisper.cpp](https://github.com/ggml-org/whisper.cpp) [![Stars](https://img.shields.io/github/stars/ggml-org/whisper.cpp?style=social&color=white)](https://github.com/ggml-org/whisper.cpp/stargazers)
+- **Description**: High-performance, dependency-free C/C++ implementation of OpenAI's Whisper model. Features quantized GGUF models (1.5-bit to 8-bit), Apple Silicon Metal acceleration, CUDA, Vulkan, and OpenVINO support. Runs on Raspberry Pi, iOS, Android, and WebAssembly.
+- **License**: MIT
+- **Best For**: Embedded edge devices, native desktop apps, mobile platforms, and zero-Python deployments.
+
+### 3. [faster-whisper](https://github.com/SYSTRAN/faster-whisper) [![Stars](https://img.shields.io/github/stars/SYSTRAN/faster-whisper?style=social&color=white)](https://github.com/SYSTRAN/faster-whisper/stargazers)
+- **Description**: Reimplementation of Whisper utilizing CTranslate2, delivering up to **4x faster inference speed with identical accuracy** and significantly lower VRAM consumption through 8-bit quantization on both CPU and GPU.
+- **License**: MIT
+- **Best For**: Production self-hosted server deployments, high-throughput batch APIs, and containerized backends.
+
+### 4. [WhisperX](https://github.com/m-bain/whisperX) [![Stars](https://img.shields.io/github/stars/m-bain/whisperX?style=social&color=white)](https://github.com/m-bain/whisperX/stargazers)
+- **Description**: State-of-the-art transcription pipeline extending Whisper with phoneme forced alignment via wav2vec 2.0 for ultra-precise word-level timestamps, combined with multi-speaker diarization using pyannote-audio.
+- **License**: BSD-2-Clause
+- **Best For**: Subtitle synchronization, meeting transcription with speaker attribution, and forensic speech analysis.
+
+### 5. [NVIDIA NeMo](https://github.com/NVIDIA/NeMo) [![Stars](https://img.shields.io/github/stars/NVIDIA/NeMo?style=social&color=white)](https://github.com/NVIDIA/NeMo/stargazers)
+- **Description**: NVIDIA's enterprise conversational AI framework housing state-of-the-art ASR models including Canary (multilingual STT & translation) and Parakeet (fast RNN-T/CTC STT). Fully optimized for TensorRT and multi-GPU distributed clusters.
+- **License**: Apache-2.0
+- **Best For**: Hyperscale GPU clusters, enterprise contact center architectures, and state-of-the-art ASR training.
+
+### 6. [Kaldi](https://github.com/kaldi-asr/kaldi) [![Stars](https://img.shields.io/github/stars/kaldi-asr/kaldi?style=social&color=white)](https://github.com/kaldi-asr/kaldi/stargazers)
+- **Description**: The historic, landmark C++ toolkit for speech recognition research. Pioneer of hybrid HMM-DNN acoustic modeling, weighted finite-state transducers (WFSTs), and reproducible speech corpora recipes.
+- **License**: Apache-2.0
+- **Best For**: Academic speech science research, custom acoustic engineering, and legacy industrial telecommunication systems.
+
+### 7. [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) [![Stars](https://img.shields.io/github/stars/k2-fsa/sherpa-onnx?style=social&color=white)](https://github.com/k2-fsa/sherpa-onnx/stargazers)
+- **Description**: Lightweight, cross-platform offline speech-to-text, text-to-speech, and speaker diarization engine powered by ONNX Runtime. Supports streaming transducer models, Whisper, Moonshine, and SenseVoice on Linux, macOS, Windows, Android, iOS, and Raspberry Pi.
+- **License**: Apache-2.0
+- **Best For**: Cross-platform real-time streaming, edge hardware, robotics, and offline embedded appliances.
+
+### 8. [Vosk](https://github.com/alphacep/vosk-api) [![Stars](https://img.shields.io/github/stars/alphacep/vosk-api?style=social&color=white)](https://github.com/alphacep/vosk-api/stargazers)
+- **Description**: Compact offline speech recognition toolkit supporting 20+ languages with lightweight 50MB models. Operates entirely without internet connectivity and provides straightforward SDK bindings for Python, Java, Node.js, C#, and Go.
+- **License**: Apache-2.0
+- **Best For**: Lightweight embedded devices, smart home appliances, offline Raspberry Pi setups, and kiosk interfaces.
+
+### 9. [SpeechBrain](https://github.com/speechbrain/speechbrain) [![Stars](https://img.shields.io/github/stars/speechbrain/speechbrain?style=social&color=white)](https://github.com/speechbrain/speechbrain/stargazers)
+- **Description**: Comprehensive PyTorch-centric open-source speech toolkit covering speech recognition, speaker identification, speech separation, multi-microphone enhancement, and spoken language understanding.
+- **License**: Apache-2.0
+- **Best For**: University and corporate research teams exploring novel deep learning speech architectures.
+
+### 10. [Moonshine](https://github.com/usefulsensors/moonshine) [![Stars](https://img.shields.io/github/stars/usefulsensors/moonshine?style=social&color=white)](https://github.com/usefulsensors/moonshine/stargazers)
+- **Description**: Ultra-low-latency, resource-efficient speech-to-text model family specifically optimized for on-device and edge hardware. Transcribes variable-length audio chunks up to 5x faster than Whisper with minimal memory footprint.
+- **License**: MIT
+- **Best For**: Low-latency voice assistants, on-device transcription, and battery-constrained IoT devices.
+
+### 11. [WhisperLiveKit](https://github.com/QuentinFuxa/WhisperLiveKit) [![Stars](https://img.shields.io/github/stars/QuentinFuxa/WhisperLiveKit?style=social&color=white)](https://github.com/QuentinFuxa/WhisperLiveKit/stargazers)
+- **Description**: Full-stack real-time streaming speech-to-text server integrating configurable latency (200ms–2000ms), built-in speaker diarization via Sortformer/Diarizen, Voice Activity Detection (VAD) turn detection, and interactive web/WebSocket interfaces.
+- **License**: Apache-2.0
+- **Best For**: Real-time meeting transcription servers, live broadcast captioning, and conversational AI agents.
+
+### 12. [pyannote-audio](https://github.com/pyannote/pyannote-audio) [![Stars](https://img.shields.io/github/stars/pyannote/pyannote-audio?style=social&color=white)](https://github.com/pyannote/pyannote-audio/stargazers)
+- **Description**: The industry-standard neural toolkit written in PyTorch for speaker diarization, voice activity detection, and speaker change detection. Underpins speaker attribution in leading transcription engines like WhisperX.
+- **License**: MIT
+- **Best For**: "Who spoke when" speaker segmentation, multi-speaker meeting separation, and audio intelligence.
+
+### 13. [Silero VAD](https://github.com/snakers4/silero-vad) [![Stars](https://img.shields.io/github/stars/snakers4/silero-vad?style=social&color=white)](https://github.com/snakers4/silero-vad/stargazers)
+- **Description**: Pre-trained, enterprise-grade Voice Activity Detector (VAD) with sub-1ms processing speed per chunk. Essential preprocessing layer for segmenting streaming audio streams prior to ASR ingestion.
+- **License**: MIT
+- **Best For**: Silence filtering, turn detection in conversational voice bots, and pre-buffering long-form audio.
+
+### 14. [ESPnet](https://github.com/espnet/espnet) [![Stars](https://img.shields.io/github/stars/espnet/espnet?style=social&color=white)](https://github.com/espnet/espnet/stargazers)
+- **Description**: End-to-end speech processing toolkit covering automatic speech recognition (ASR), text-to-speech (TTS), speech translation (ST), and speech enhancement using PyTorch and Kaldi-style data loaders.
+- **License**: Apache-2.0
+- **Best For**: Academic benchmark reproduction and end-to-end unified speech model training.
+
+### 15. [WhisperLive](https://github.com/collabora/WhisperLive) [![Stars](https://img.shields.io/github/stars/collabora/WhisperLive?style=social&color=white)](https://github.com/collabora/WhisperLive/stargazers)
+- **Description**: Robust WebSocket-based client-server streaming transcription architecture from Collabora. Employs faster-whisper on the server with concurrent client session multiplexing.
+- **License**: MIT
+- **Best For**: Browser-to-server real-time audio streaming, web voice apps, and conferencing integration.
+
+### 16. [Distil-Whisper](https://github.com/huggingface/distil-whisper) [![Stars](https://img.shields.io/github/stars/huggingface/distil-whisper?style=social&color=white)](https://github.com/huggingface/distil-whisper/stargazers)
+- **Description**: Distilled variant of OpenAI's Whisper developed by Hugging Face. Operates **6x faster with 49% fewer parameters** while maintaining within 1% Word Error Rate (WER) of the original full-sized model.
+- **License**: MIT
+- **Best For**: High-throughput CPU/GPU inference, low-cost serverless workers, and latency-sensitive production tasks.
+
+### 17. [Whisper-Streaming](https://github.com/ufal/whisper_streaming) [![Stars](https://img.shields.io/github/stars/ufal/whisper_streaming?style=social&color=white)](https://github.com/ufal/whisper_streaming/stargazers)
+- **Description**: Real-time streaming implementation of Whisper developed at Charles University. Uses a LocalAgreement policy across sliding audio windows to emit confirmed text with minimal latency.
+- **License**: MIT
+- **Best For**: Research on streaming heuristic strategies and low-latency chunk commitment.
+
+### 18. [whisper-web](https://github.com/xenova/whisper-web) [![Stars](https://img.shields.io/github/stars/xenova/whisper-web?style=social&color=white)](https://github.com/xenova/whisper-web/stargazers)
+- **Description**: Completely client-side speech recognition running directly in the browser via Transformers.js and ONNX Runtime Web. Zero audio data leaves the user's device.
+- **License**: Apache-2.0
+- **Best For**: Private web-based transcription apps, zero-server-cost applications, and browser extensions.
+
+### 19. [Coqui STT](https://github.com/coqui-ai/STT) [![Stars](https://img.shields.io/github/stars/coqui-ai/STT?style=social&color=white)](https://github.com/coqui-ai/STT/stargazers)
+- **Description**: Open-source deep learning speech recognition engine derived from Mozilla's DeepSpeech architecture, optimized for production inference across multiple programming languages.
+- **License**: MPL-2.0
+- **Best For**: Legacy embedded systems and custom non-transformer acoustic models.
+
+---
+
+## 🎯 Architecture & Selection Guide
+
+```
+                            [Audio Input Stream]
+                                     │
+                        ┌────────────┴────────────┐
+                        ▼                         ▼
+             [Real-Time Streaming]       [Pre-Recorded / Batch]
+                        │                         │
+            ┌───────────┴───────────┐         ┌───┴────────────────┐
+            ▼                       ▼         ▼                    ▼
+     [Hosted API]            [Self-Hosted] [Hosted API]     [Self-Hosted]
+     • Deepgram (Nova-3)     • faster-     • AssemblyAI     • faster-whisper
+     • AssemblyAI (Stream)     whisper     • Google STT     • WhisperX
+     • Azure Speech          • sherpa-     • Rev AI           (Timestamps &
+                               onnx                           Diarization)
+                             • Whisper-
+                               LiveKit
+```
+
+### 🔍 Quick Recommendation Matrix
+
+- ⚡ **Lowest Streaming Latency for Voice AI Agents**: Choose **[Deepgram](https://deepgram.com/)** (Hosted API, sub-300ms) or **[Moonshine](https://github.com/usefulsensors/moonshine)** / **[sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx)** (Self-Hosted on-device).
+- ⏱️ **Best for Subtitles, Video Captions & Word Timestamps**: Choose **[WhisperX](https://github.com/m-bain/whisperX)** (Forced alignment + pyannote diarization) or **[Rev AI](https://www.rev.com/)**.
+- 🚀 **Most Cost-Effective Self-Hosted Production Server**: Deploy **[faster-whisper](https://github.com/SYSTRAN/faster-whisper)** with CTranslate2 GPU int8 quantization or **[Distil-Whisper](https://github.com/huggingface/distil-whisper)**.
+- 📱 **Best for On-Device, Mobile & Embedded Hardware**: Deploy **[whisper.cpp](https://github.com/ggml-org/whisper.cpp)** (GGUF quantization) or **[Vosk](https://github.com/alphacep/vosk-api)** (50MB offline models).
+- 🏢 **Best for Enterprise Cloud Ecosystem Integration**: Choose **[Microsoft Azure Speech](https://azure.microsoft.com/en-us/products/ai-services/speech-to-text)** or **[Google Cloud STT](https://cloud.google.com/speech-to-text)**.
+
+---
+
+## 🤝 How to Contribute
+
+Contributions are warmly encouraged! Help keep this ecosystem guide comprehensive, accurate, and up to date:
+
+1. 🍴 **Fork the repository** on GitHub.
+2. 🌿 **Create a descriptive feature branch** (`git checkout -b feature/add-new-stt-tool`).
+3. 📝 **Add or update entries** in `README.md` following the established tabular format (for SaaS) or badge-linked structure (for Open-Source). Ensure all pricing and limits remain factual and verifiable.
+4. 🚀 **Commit your updates** (`git commit -m "Add: [Tool Name] to speech-to-text list"`).
+5. 📬 **Submit a Pull Request** with a clear explanation of why the tool is relevant to the community.
+
+---
+
+## 📈 Star History
+
+[![Star History Chart](https://star-history.dera.page/svg?repos=ishandutta2007/Awesome-Speech-To-Text-STT&type=date&legend=top-left)](https://star-history.dera.page/#ishandutta2007/Awesome-Speech-To-Text-STT&type=date&legend=top-left)
+
+---
+
+## 💖 Support & Sponsoring
+
+If you found this curated guide to Speech-to-Text (STT) and ASR tools valuable, consider supporting the maintenance and continuous benchmarking of this repository:
+
+- ⭐ **Star this repository** to improve discoverability for other developers and researchers.
+- 🍴 **Fork and share** with colleagues working on audio AI, voice bots, and transcription.
+- ☕ **Sponsor the Maintainer**: Support ongoing curation, validation, and ecosystem updates through the [GitHub Sponsors Dashboard](https://github.com/sponsors/ishandutta2007).
+
+<p align="center">
+  <a href="https://github.com/sponsors/ishandutta2007">
+    <img src="https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa?style=for-the-badge&logo=github-sponsors" alt="Sponsor on GitHub" />
+  </a>
+</p>
+
+---
+
+## ⚖️ Disclaimer
+
+- This directory is a **community-curated guide** intended for informational and educational purposes. Inclusion does not constitute an official endorsement.
+- Speech-to-text systems differ considerably across acoustic robustness, latency, language coverage, and privacy characteristics.
+- Benchmarks like Word Error Rate (WER) and streaming latency can vary drastically based on background noise, accents, sampling rates, microphone hardware, and domain terminology. Validate models against your specific audio distributions before production deployment.
+
+---
+
+<p align="center">
+  <sub>Maintained with ❤️ by <a href="https://github.com/ishandutta2007">Ishan Dutta</a> and the open-source voice AI community.</sub>
+</p>

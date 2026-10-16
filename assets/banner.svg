@@ -1,0 +1,206 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="50%" stop-color="#0d1527" />
+      <stop offset="100%" stop-color="#050811" />
+    </linearGradient>
+
+    <!-- Glowing Accent Gradients -->
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+
+    <linearGradient id="waveGrad1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.7" />
+    </linearGradient>
+
+    <linearGradient id="waveGrad2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.7" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 800;
+      font-size: 52px;
+      fill: #ffffff;
+      letter-spacing: -0.5px;
+    }
+    .subtitle-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 500;
+      font-size: 21px;
+      fill: #94a3b8;
+      letter-spacing: 0.2px;
+    }
+    .tag-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      fill: #e2e8f0;
+      letter-spacing: 0.5px;
+    }
+    .badge-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      fill: #38bdf8;
+      letter-spacing: 1.2px;
+    }
+  </style>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="380" rx="16" fill="url(#bgGradient)" />
+
+  <!-- Outer Ambient Border Glow -->
+  <rect x="1" y="1" width="1198" height="378" rx="15" fill="none" stroke="url(#primaryGrad)" stroke-width="1.5" stroke-opacity="0.4" />
+
+  <!-- Dynamic Equalizer Sound Waves (Left Side) - Strictly Background -->
+  <g opacity="0.35" transform="translate(40, 20)">
+    <!-- Waveform Bar 1 -->
+    <rect x="0" y="220" width="7" height="60" rx="3.5" fill="url(#waveGrad1)">
+      <animate attributeName="height" values="60;140;40;110;60" dur="2.4s" repeatCount="indefinite" />
+      <animate attributeName="y" values="220;140;240;170;220" dur="2.4s" repeatCount="indefinite" />
+    </rect>
+    <!-- Waveform Bar 2 -->
+    <rect x="16" y="200" width="7" height="80" rx="3.5" fill="url(#waveGrad1)">
+      <animate attributeName="height" values="80;170;70;130;80" dur="1.9s" repeatCount="indefinite" />
+      <animate attributeName="y" values="200;110;210;150;200" dur="1.9s" repeatCount="indefinite" />
+    </rect>
+    <!-- Waveform Bar 3 -->
+    <rect x="32" y="180" width="7" height="100" rx="3.5" fill="url(#waveGrad1)">
+      <animate attributeName="height" values="100;50;150;80;100" dur="2.8s" repeatCount="indefinite" />
+      <animate attributeName="y" values="180;230;130;200;180" dur="2.8s" repeatCount="indefinite" />
+    </rect>
+    <!-- Waveform Bar 4 -->
+    <rect x="48" y="210" width="7" height="70" rx="3.5" fill="url(#waveGrad1)">
+      <animate attributeName="height" values="70;160;60;120;70" dur="2.1s" repeatCount="indefinite" />
+      <animate attributeName="y" values="210;120;220;160;210" dur="2.1s" repeatCount="indefinite" />
+    </rect>
+    <!-- Waveform Bar 5 -->
+    <rect x="64" y="230" width="7" height="50" rx="3.5" fill="url(#waveGrad1)">
+      <animate attributeName="height" values="50;110;45;95;50" dur="1.7s" repeatCount="indefinite" />
+      <animate attributeName="y" values="230;170;235;185;230" dur="1.7s" repeatCount="indefinite" />
+    </rect>
+  </g>
+
+  <!-- Dynamic Equalizer Sound Waves (Right Side) - Strictly Background -->
+  <g opacity="0.35" transform="translate(1080, 20)">
+    <!-- Waveform Bar 6 -->
+    <rect x="0" y="230" width="7" height="50" rx="3.5" fill="url(#waveGrad2)">
+      <animate attributeName="height" values="50;130;40;100;50" dur="2.2s" repeatCount="indefinite" />
+      <animate attributeName="y" values="230;150;240;180;230" dur="2.2s" repeatCount="indefinite" />
+    </rect>
+    <!-- Waveform Bar 7 -->
+    <rect x="16" y="200" width="7" height="80" rx="3.5" fill="url(#waveGrad2)">
+      <animate attributeName="height" values="80;50;160;70;80" dur="2.6s" repeatCount="indefinite" />
+      <animate attributeName="y" values="200;230;120;210;200" dur="2.6s" repeatCount="indefinite" />
+    </rect>
+    <!-- Waveform Bar 8 -->
+    <rect x="32" y="170" width="7" height="110" rx="3.5" fill="url(#waveGrad2)">
+      <animate attributeName="height" values="110;180;60;140;110" dur="1.8s" repeatCount="indefinite" />
+      <animate attributeName="y" values="170;100;220;140;170" dur="1.8s" repeatCount="indefinite" />
+    </rect>
+    <!-- Waveform Bar 9 -->
+    <rect x="48" y="210" width="7" height="70" rx="3.5" fill="url(#waveGrad2)">
+      <animate attributeName="height" values="70;140;50;110;70" dur="2.5s" repeatCount="indefinite" />
+      <animate attributeName="y" values="210;140;230;170;210" dur="2.5s" repeatCount="indefinite" />
+    </rect>
+    <!-- Waveform Bar 10 -->
+    <rect x="64" y="220" width="7" height="60" rx="3.5" fill="url(#waveGrad2)">
+      <animate attributeName="height" values="60;110;40;90;60" dur="2.0s" repeatCount="indefinite" />
+      <animate attributeName="y" values="220;170;240;190;220" dur="2.0s" repeatCount="indefinite" />
+    </rect>
+  </g>
+
+  <!-- Ambient Animated Audio Sine Wave in Background -->
+  <path d="M 0,330 Q 150,290 300,330 T 600,330 T 900,330 T 1200,330" fill="none" stroke="url(#primaryGrad)" stroke-width="2.5" opacity="0.25">
+    <animate attributeName="d" values="
+      M 0,330 Q 150,290 300,330 T 600,330 T 900,330 T 1200,330;
+      M 0,330 Q 150,360 300,330 T 600,330 T 900,330 T 1200,330;
+      M 0,330 Q 150,290 300,330 T 600,330 T 900,330 T 1200,330" dur="6s" repeatCount="indefinite" />
+  </path>
+  
+  <path d="M 0,335 Q 150,360 300,335 T 600,335 T 900,335 T 1200,335" fill="none" stroke="#ec4899" stroke-width="1.5" opacity="0.18">
+    <animate attributeName="d" values="
+      M 0,335 Q 150,360 300,335 T 600,335 T 900,335 T 1200,335;
+      M 0,335 Q 150,310 300,335 T 600,335 T 900,335 T 1200,335;
+      M 0,335 Q 150,360 300,335 T 600,335 T 900,335 T 1200,335" dur="5s" repeatCount="indefinite" />
+  </path>
+
+  <!-- Center Protected Foreground Scrim Card (Guarantees Title & Subtitle Never Obscured) -->
+  <rect x="140" y="35" width="920" height="295" rx="16" fill="#0d1424" fill-opacity="0.82" stroke="#1e293b" stroke-width="1" />
+
+  <!-- Top Category Pill / Badge -->
+  <g transform="translate(470, 56)">
+    <rect x="0" y="0" width="260" height="28" rx="14" fill="#0f2847" stroke="#0284c7" stroke-width="1" />
+    <circle cx="16" cy="14" r="4.5" fill="#38bdf8" filter="url(#softGlow)">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <text x="32" y="19" class="badge-text">CURATED AUDIO AI DIRECTORY</text>
+  </g>
+
+  <!-- Main Title with Glowing Gradient Accent -->
+  <g transform="translate(600, 142)">
+    <!-- Subtle Back Shadow -->
+    <text text-anchor="middle" class="title-text" fill="#000000" opacity="0.6" y="2">Awesome Speech-to-Text (STT)</text>
+    <text text-anchor="middle" class="title-text">
+      Awesome <tspan fill="url(#primaryGrad)">Speech-to-Text</tspan> (STT)
+    </text>
+  </g>
+
+  <!-- Subtitle -->
+  <text x="600" y="190" text-anchor="middle" class="subtitle-text">
+    Top Enterprise SaaS Platforms &amp; High-Performance Open-Source ASR Models
+  </text>
+
+  <!-- Divider Line -->
+  <line x1="350" y1="218" x2="850" y2="218" stroke="url(#primaryGrad)" stroke-width="1" stroke-opacity="0.4" />
+
+  <!-- Dynamic Feature Tags / Pills (In Clear Bottom Row) -->
+  <g transform="translate(600, 260)">
+    <!-- Pill 1: Streaming Latency -->
+    <g transform="translate(-390, 0)">
+      <rect x="0" y="0" width="180" height="34" rx="17" fill="#1e293b" fill-opacity="0.8" stroke="#334155" stroke-width="1" />
+      <text x="90" y="22" text-anchor="middle" class="tag-text">⚡ Real-Time Streaming</text>
+    </g>
+    <!-- Pill 2: Speaker Diarization -->
+    <g transform="translate(-195, 0)">
+      <rect x="0" y="0" width="185" height="34" rx="17" fill="#1e293b" fill-opacity="0.8" stroke="#334155" stroke-width="1" />
+      <text x="92" y="22" text-anchor="middle" class="tag-text">👥 Speaker Diarization</text>
+    </g>
+    <!-- Pill 3: Word-Level Timestamps -->
+    <g transform="translate(5, 0)">
+      <rect x="0" y="0" width="195" height="34" rx="17" fill="#1e293b" fill-opacity="0.8" stroke="#334155" stroke-width="1" />
+      <text x="97" y="22" text-anchor="middle" class="tag-text">⏱️ Word Timestamps</text>
+    </g>
+    <!-- Pill 4: Local & Offline Inference -->
+    <g transform="translate(215, 0)">
+      <rect x="0" y="0" width="175" height="34" rx="17" fill="#1e293b" fill-opacity="0.8" stroke="#334155" stroke-width="1" />
+      <text x="87" y="22" text-anchor="middle" class="tag-text">🔒 Offline &amp; On-Device</text>
+    </g>
+  </g>
+</svg>
