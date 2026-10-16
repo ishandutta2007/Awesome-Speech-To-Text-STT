@@ -1,6 +1,6 @@
 # Awesome-Speech-To-Text-STT
 
-# Top Speech-to-Text (STT) Tools Ecosystem
+## Top Speech-to-Text (STT) Tools Ecosystem
 
 **Curated List of SaaS Products & Open-Source GitHub Projects**  
 *Focused on Streaming Transcription, Speaker Diarization & Word-Level Timestamps*  
